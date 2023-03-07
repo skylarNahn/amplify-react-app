@@ -7,6 +7,9 @@ import { API } from 'aws-amplify'
 import './App.css';
 
 const App = () => {
+  // create a variable for loading
+  const [loading, updateloading] =useState(true);
+
   // Create additional state to hold user input for limit and start properties
   const [input, updateInput] = useState({ limit: 5, start: 0 });
 
@@ -20,9 +23,11 @@ const App = () => {
 
   // Define function to all API
   const fetchCoins = async () => {
+    updateloading(true);
     const { limit, start } = input
     const data = await API.get('cryptoapi', `/coins?limit=${limit}&start=${start}`);
-    updateCoins(data.coins)
+    updateCoins(data.coins);
+    updateloading(false);
   };
 
   // Call fetchCoins function when component loads
@@ -43,9 +48,9 @@ const App = () => {
         placeholder="limit"
       />
       <button onClick={fetchCoins}>Fetch Coins</button>
-      
+      {loading && <h2>Loading...</h2>}
       {
-        coins.map((coin, index) => (
+        !loading && coins.map((coin, index) => (
           <div key={index}>
             <h2>{coin.name} - {coin.symbol}</h2>
             <h5>${coin.price_usd}</h5>
