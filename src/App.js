@@ -6,7 +6,7 @@ import { API } from 'aws-amplify'
 
 import './App.css';
 
-function App() {
+const App = () => {
   // Create coins variable and set to empty array
   const [coins, updateCoins] = useState([])
 
