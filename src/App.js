@@ -6,6 +6,8 @@ import { API } from 'aws-amplify'
 
 import './App.css';
 
+import { GitHubBornOn } from './GitHubBornOn';
+
 const App = () => {
   // create a variable for loading
   const [loading, updateloading] =useState(true);
@@ -57,6 +59,8 @@ const App = () => {
           </div>
         ))
       }
+
+      <GitHubBornOn/>
     </div>
   );
 }
